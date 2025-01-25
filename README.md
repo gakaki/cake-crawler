@@ -1456,3 +1456,25 @@ curl --location --request POST 'https://h5.youzan.com/retail/h5/miniprogram/good
 
 
 
+请给brand品牌表增加一个字段 用来存放原始json
+
+请生成2个entity用来存储 分类category 和 商品good
+category字段
+
+    分类名
+    分类图片
+    分类url
+    分类原始json数据
+
+商品good
+
+    商品名
+    商品描述
+    商品图片
+    商品价格
+    商品url
+    分类原始json数据
+
+
+请修改youzan.service.spec.ts中的方法 得到数据后拼装到category中,然后循环category中的字段 继续请求剩下的接口获得good数据 存储到数据库中
+具体数据结构请看readme.md

@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Brand } from './entities/brand';
+import { Brand } from './entities/brand.entity';
 
 @Controller('brands')
 export class BrandController {
@@ -12,20 +12,7 @@ export class BrandController {
 
   @Get()
   async getAllBrands() {
-    return this.brandRepository.find();
+    return await this.brandRepository.find();
   }
-
-  @Get(':name')
-  async getBrandByName(@Param('name') name: string) {
-    return this.brandRepository.findOne({ where: { name } });
-  }
-
-  @Get(':name/items')
-  async getBrandItems(@Param('name') name: string) {
-    const brand = await this.brandRepository.findOne({ 
-      where: { name },
-      select: ['itemGroups']
-    });
-    return brand?.itemGroups || [];
-  }
+  
 }
