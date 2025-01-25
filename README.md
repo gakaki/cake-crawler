@@ -5,8 +5,8 @@
 一共有2家蛋糕店,对应的需要生成实体类,并使用NestJS TypeOrmModule 实现数据库操作 使用sqlite
 
 1 WentingG 文汀半糖蛋糕
-app_id wx50d13a67c1b59969
-kdt_id 177397716
+app_id wx2e2e28945c980c46
+kdt_id 146387302
 
 2 德罗心 蛋糕
 app_id wx50d13a67c1b59969

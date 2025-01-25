@@ -47,9 +47,6 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
-      typeorm:
-        specifier: ^0.3.20
-        version: 0.3.20(pg@8.13.1)(sqlite3@5.1.7)
     devDependencies:
       '@nestjs/testing':
         specifier: ^11.0.4
@@ -60,6 +57,9 @@ importers:
       '@rspack/core':
         specifier: 1.2.2
         version: 1.2.2
+      '@types/node':
+        specifier: ^22.10.10
+        version: 22.10.10
       '@vitest/coverage-istanbul':
         specifier: ^3.0.4
         version: 3.0.4(vitest@3.0.4)
@@ -72,6 +72,9 @@ importers:
       istanbul-badges-readme:
         specifier: ^1.9.0
         version: 1.9.0
+      typeorm:
+        specifier: ^0.3.20
+        version: 0.3.20(pg@8.13.1)(sqlite3@5.1.7)
       unplugin-swc:
         specifier: ^1.5.1
         version: 1.5.1(@swc/core@1.10.9)(rollup@4.32.0)

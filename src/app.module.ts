@@ -6,18 +6,11 @@ import { BrandModule } from './brand.module';
 import { Brand } from './entities/brand';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksService } from './task.service';
+import { databaseConfig } from './config/database';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: "postgres",
-      host: "db.yugyfhvjowebnuhdupgf.supabase.co",
-      port: 5432,
-      username: "postgres",
-      password: "ilovePs5",
-      database: "postgres",
-      entities: [Brand],
-    }),
+    TypeOrmModule.forRoot(databaseConfig),
     BrandModule,
     ScheduleModule.forRoot()
   ],
