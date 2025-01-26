@@ -82,7 +82,10 @@ export class Good {
 	)
 	@JoinColumn({ name: "brandId" })
 	brand?: Brand;
-
+  
 	@Column({ nullable: true })
 	brandId?: number;
+
+  @Column('json', { nullable: true })
+  similarity?: string;
 }

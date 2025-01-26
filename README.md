@@ -1478,3 +1478,72 @@ category字段
 
 请修改youzan.service.spec.ts中的方法 得到数据后拼装到category中,然后循环category中的字段 继续请求剩下的接口获得good数据 存储到数据库中
 具体数据结构请看readme.md
+
+
+
+
+
+
+
+### 手动排序 deepseek
+
+### 关于相似度
+
+
+https://github.com/rapidfuzz/strsim-rs
+// 近似度
+https://github.com/Lips7/Matcher
+
+高性能文本匹配器
+https://www.v2ex.com/t/1049027
+
+## deepseek r1 训练
+https://www.bilibili.com/video/BV1tyfdY4Eyu/?spm_id_from=333.1007.tianma.2-2-4.click&vd_source=c6697a063eaf5e2d3acbeb85caac9e07
+
+
+## 让deepseek帮我排序生成 手动排序
+
+
+
+pnpm add natural cosine-similarity
+脚本代码
+const fs = require("fs");
+const natural = require("natural");
+const cosineSimilarity = require("cosine-similarity");
+const tokenizer = new natural.WordTokenizer();
+
+// 计算文本的词袋模型
+const getVector = text => {
+  const tokens = tokenizer.tokenize(text.toLowerCase());
+  const frequency = tokens.reduce((acc, token) => {
+    acc[token] = (acc[token] || 0) + 1;
+    return acc;
+  }, {});
+  return frequency;
+};
+
+// 计算两个文本的相似度
+// threshold 为重复率,范围 0-1,自由设置
+const isSimilar = (text1, text2, threshold = 0.2) => {
+  const vector1 = getVector(text1);
+  const vector2 = getVector(text2);
+  const similarity = cosineSimilarity(vector1, vector2);
+  return similarity >= threshold;
+};
+
+
+
+
+### 中文分词近似值 
+pnpm i @node-rs/jieba --save
+
+
+编写相似度去重的service
+1 先从goods表中 查询所有brand.name 含有 wenting 文汀的商品
+2 从goods表中 查询所有brand.name 含有 德罗心 的 商品
+3 循环遍历 从1 中获得的 goods , 用每个good 和 2中的所有goods 进行比较,按照相似度顺序排序,相似度判定方法如下
+ 先判断两个goods的brand.name 是否相同,如果相同,则相似度100%.
+ 然后使用@https://www.vvhan.com/article/nodejs-text-similar-de-duplication-script.html 提到的方法.
+ 对 good 的 商品描述description进行相似度比较.然后对 good的商品标题 name 进行相似度比较..
+ 得到的排序score数据和对应的good保存下来.. 
+4 循环结束后,把排序好的goods 插入到good的 similarity数组中 返回

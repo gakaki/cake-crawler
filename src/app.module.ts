@@ -11,6 +11,9 @@ import { BrandController } from "./brand.controller";
 import { GoodsController } from "./good/goods.controller";
 import { Brand, Category, Good } from "./entities";
 import { CacheModule } from "@nestjs/cache-manager";
+import { GoodService } from "./good/good.service";
+import { SimilarityService } from "./similarity/similarity.service";
+import { SimilarityController } from './similarity/similarity.controller';
 
 @Module({
 	imports: [
@@ -24,10 +27,9 @@ import { CacheModule } from "@nestjs/cache-manager";
 		forwardRef(() => BrandModule),
 		forwardRef(() => YouZanModule),
 		forwardRef(() => TaskModule),
-
-		ScheduleModule.forRoot(),
 	],
-	controllers: [AppController, GoodsController, BrandController],
-	providers: [AppService],
+	controllers: [AppController, GoodsController, BrandController, SimilarityController],
+	providers: [AppService,GoodService,SimilarityService],
 })
 export class AppModule {}
+
